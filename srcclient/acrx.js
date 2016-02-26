@@ -10,15 +10,13 @@ const $results =  $("#results");
 
 const $keyup = Rx.Observable.fromEvent($title, "keyup");
 
-const $queries = $keyup.map(e=>e.target.value).distinctUntilChanged().debounceTime(500);
+const $queries = $keyup.map(e=>e.target.value).distinctUntilChanged().debounceTime(500).mergeMap(query=>getItems(query)); //equi to .mergeMap(getItems);
 
-$queries.subscribe(query=>{
-    getItems(query)
-        .then(items=>{
+$queries.subscribe(items=>{
         $results.empty();
     const $items = items.map(item=>$(`<li/>`).text(item));
     $results.append($items);
-});
+
 })
 
 

@@ -19719,16 +19719,16 @@ var $keyup = _Rx2.default.Observable.fromEvent($title, "keyup");
 
 var $queries = $keyup.map(function (e) {
     return e.target.value;
-}).distinctUntilChanged().debounceTime(500);
+}).distinctUntilChanged().debounceTime(500).mergeMap(function (query) {
+    return getItems(query);
+}); //equi to .mergeMap(getItems);
 
-$queries.subscribe(function (query) {
-    getItems(query).then(function (items) {
-        $results.empty();
-        var $items = items.map(function (item) {
-            return (0, _jquery2.default)("<li/>").text(item);
-        });
-        $results.append($items);
+$queries.subscribe(function (items) {
+    $results.empty();
+    var $items = items.map(function (item) {
+        return (0, _jquery2.default)("<li/>").text(item);
     });
+    $results.append($items);
 });
 
 function getItems(title) {
