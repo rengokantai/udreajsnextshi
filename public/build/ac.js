@@ -9846,8 +9846,12 @@ var $title = (0, _jquery2.default)("#title"); /**
 
 var $results = (0, _jquery2.default)("#results");
 
+var last = null;
 $title.on("keyup", function (e) {
     var title = e.target.value;
+
+    if (title == last) return;
+    last = title;
 
     getItems(title).then(function (items) {
         $results.empty();
@@ -9859,9 +9863,10 @@ $title.on("keyup", function (e) {
 });
 
 function getItems(title) {
+    console.log("" + title);
     return new Promise(function (res, rej) {
         window.setTimeout(function () {
-            res([title, "Item", "another"]);
+            res([title, "Item"]);
         }, 500 + (Math.random() + 100));
     });
 }
