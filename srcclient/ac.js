@@ -8,6 +8,7 @@ const $results =  $("#results");
 
 let last = null;
 let timeout = null;
+let nextId = 0;
 $title.on("keyup",e=>{
     const title = e.target.value;
 
@@ -18,8 +19,12 @@ $title.on("keyup",e=>{
     if(timeout)
     window.clearTimeout(timeout);
 
+    let currId = ++nextId;
+
     timeout = window.setTimeout(()=>{
         getItems(title).then(items=>{
+            if(currId!=nextId)
+            return;
             $results.empty();
             const $items = items.map(item=>$(`<li/>`).text(item));
             $results.append($items);

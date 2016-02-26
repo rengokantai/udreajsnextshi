@@ -9848,6 +9848,7 @@ var $results = (0, _jquery2.default)("#results");
 
 var last = null;
 var timeout = null;
+var nextId = 0;
 $title.on("keyup", function (e) {
     var title = e.target.value;
 
@@ -9856,8 +9857,11 @@ $title.on("keyup", function (e) {
 
     if (timeout) window.clearTimeout(timeout);
 
+    var currId = ++nextId;
+
     timeout = window.setTimeout(function () {
         getItems(title).then(function (items) {
+            if (currId != nextId) return;
             $results.empty();
             var $items = items.map(function (item) {
                 return (0, _jquery2.default)("<li/>").text(item);
