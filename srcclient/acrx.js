@@ -10,11 +10,11 @@ const $results =  $("#results");
 
 const $keyup = Rx.Observable.fromEvent($title, "keyup");
 
+const $queries = $keyup.map(e=>e.target.value).distinctUntilChanged();
 
-
-$keyup.subscribe(e=>{
-    getItems(e.target.value)
-        .then(items=>{q
+$queries.subscribe(query=>{
+    getItems(query)
+        .then(items=>{
         $results.empty();
     const $items = items.map(item=>$(`<li/>`).text(item));
     $results.append($items);

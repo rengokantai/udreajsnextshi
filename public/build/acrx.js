@@ -19717,9 +19717,12 @@ var $results = (0, _jquery2.default)("#results");
 
 var $keyup = _Rx2.default.Observable.fromEvent($title, "keyup");
 
-$keyup.subscribe(function (e) {
-    getItems(e.target.value).then(function (items) {
-        q;
+var $queries = $keyup.map(function (e) {
+    return e.target.value;
+}).distinctUntilChanged();
+
+$queries.subscribe(function (query) {
+    getItems(query).then(function (items) {
         $results.empty();
         var $items = items.map(function (item) {
             return (0, _jquery2.default)("<li/>").text(item);
