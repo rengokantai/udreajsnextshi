@@ -19719,7 +19719,7 @@ var $keyup = _Rx2.default.Observable.fromEvent($title, "keyup");
 
 var $queries = $keyup.map(function (e) {
     return e.target.value;
-}).distinctUntilChanged().debounceTime(500).mergeMap(function (query) {
+}).distinctUntilChanged().debounceTime(500).switchMap(function (query) {
     return getItems(query);
 }); //equi to .mergeMap(getItems);
 
