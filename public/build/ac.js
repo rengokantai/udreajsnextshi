@@ -9861,7 +9861,8 @@ $title.on("keyup", function (e) {
 
     timeout = window.setTimeout(function () {
         getItems(title).then(function (items) {
-            if (currId != nextId) return;
+            if (currId != nextId) //why this? To dispose unnecessary result strings.Only keep last one.
+                return;
             $results.empty();
             var $items = items.map(function (item) {
                 return (0, _jquery2.default)("<li/>").text(item);

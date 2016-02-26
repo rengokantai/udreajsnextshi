@@ -23,7 +23,7 @@ $title.on("keyup",e=>{
 
     timeout = window.setTimeout(()=>{
         getItems(title).then(items=>{
-            if(currId!=nextId)
+            if(currId!=nextId)  //why this? To dispose unnecessary result strings.Only keep last one.
             return;
             $results.empty();
             const $items = items.map(item=>$(`<li/>`).text(item));

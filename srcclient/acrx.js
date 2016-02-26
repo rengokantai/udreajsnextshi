@@ -10,7 +10,7 @@ const $results =  $("#results");
 
 const $keyup = Rx.Observable.fromEvent($title, "keyup");
 
-const $queries = $keyup.map(e=>e.target.value).distinctUntilChanged();
+const $queries = $keyup.map(e=>e.target.value).distinctUntilChanged().debounceTime(500);
 
 $queries.subscribe(query=>{
     getItems(query)
