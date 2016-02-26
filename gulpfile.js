@@ -31,6 +31,7 @@ gulp.task('client',()=>{
     return gulp.watch("./srcserver/**/*.js").on("change",initBundlerWatch);
 })
 
+gulp.task("watch",gulp.parallel("client","server"));
 
 gulp.task("watch:server",()=>{
     return gulp.watch("./srcclient/**/*.js",gulp.series("server"));
@@ -42,6 +43,8 @@ function initBundlerWatch(file){
         return;
     }
     const bundler = createBundler(file);
+
+    bundlers[file] =bundler;
     const watcher = watchify(bundler);
     const filename = path.basename(file);
 
@@ -53,7 +56,7 @@ function initBundlerWatch(file){
     }
 
     watcher.on('update',bundle);
-    watcher.on('time',time=>console.log('time'));
+    watcher.on('time',time=>console.log(`build on ${time} ms` ));
     bundle();
 }
 
