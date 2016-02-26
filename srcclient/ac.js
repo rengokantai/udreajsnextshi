@@ -7,6 +7,7 @@ const $title = $("#title");
 const $results =  $("#results");
 
 let last = null;
+let timeout = null;
 $title.on("keyup",e=>{
     const title = e.target.value;
 
@@ -14,11 +15,18 @@ $title.on("keyup",e=>{
     return;
     last=title;
 
-    getItems(title).then(items=>{
-        $results.empty();
-        const $items = items.map(item=>$(`<li/>`).text(item));
-        $results.append($items);
-    })
+    if(timeout)
+    window.clearTimeout(timeout);
+
+    timeout = window.setTimeout(()=>{
+        getItems(title).then(items=>{
+            $results.empty();
+            const $items = items.map(item=>$(`<li/>`).text(item));
+            $results.append($items);
+        });
+    },500);
+
+
 });
 
 
