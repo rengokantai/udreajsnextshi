@@ -13,3 +13,11 @@ const $sp = new Rx.Observable(observer=>{
         },1000);
     },1000);
 });
+
+//three parameters. (next,error,complete)
+//
+
+$sp.subscribe(i=>console.log(`${i}`),
+    error=>console.log(`${error}`),
+    ()=>console.log(``)
+)
