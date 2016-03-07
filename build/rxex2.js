@@ -9876,8 +9876,12 @@ function createInt(time) {
         var timer = setInterval(function () {
             observer.next(i++);
 
-            if (i == 10) clearInterval(timer);
+            //if (i==10)
+            //clearInterval(timer);
         }, time);
+        return function () {
+            clearInterval(timer);
+        };
     });
 } /**
    * Created by Hernan Y.Ke on 2016/3/7.
@@ -9899,6 +9903,10 @@ function createSub(t) {
 }
 
 var sec = createInt(1000);
-sec.subscribe(createSub("newsub"));
+var sub = sec.subscribe(createSub("newsub"));
+
+setTimeout(function () {
+    sub.unsubscribe();
+}, 5000);
 
 },{"rxjs/Rx":7}]},{},[254]);

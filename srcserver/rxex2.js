@@ -8,9 +8,12 @@ function createInt(time){
         var timer = setInterval(()=>{
             observer.next(i++);
 
-            if (i==10)
+            //if (i==10)
+            //clearInterval(timer);
+        },time);
+        return ()=>{
             clearInterval(timer);
-        },time)
+        }
     })
 }
 
@@ -27,4 +30,8 @@ function createSub(t){
 }
 
 const sec = createInt(1000);
-sec.subscribe(createSub("newsub"));
+const sub = sec.subscribe(createSub("newsub"));
+
+setTimeout(()=>{
+    sub.unsubscribe();
+},5000)
