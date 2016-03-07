@@ -52,7 +52,7 @@ function initBundlerWatch(file){
     function bundle(){
         return bundler.bundle().on("error",error=>console.error(error))
         .pipe(source(filename))
-        .pipe(gulp.dest("./public/build"))
+        .pipe(gulp.dest("./build"))
     }
 
     watcher.on('update',bundle);
