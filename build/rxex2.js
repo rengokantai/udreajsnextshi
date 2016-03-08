@@ -9902,11 +9902,32 @@ function createSub(t) {
     };
 }
 
-var sec = createInt(1000);
-var sub = sec.subscribe(createSub("newsub"));
+//setTimeout(()=>{
+//    sub.unsubscribe();
+//},5000)
 
-setTimeout(function () {
-    sub.unsubscribe();
-}, 5000);
+//multi param
+
+function take(observable, amount) {
+    return new _Rx2.default.Observable(function (observer) {
+        var c = 0;
+        var subscription = observable.subscribe({
+            next: function next(item) {
+                observer.next(item);
+                if (++c >= amount) observer.complete();
+            },
+            error: function error(_error2) {},
+            complete: function complete() {
+                return function () {
+                    return subscription.unsubscribe();
+                };
+            }
+        });
+    });
+}
+
+var sec = createInt(1000);
+var firstn = take(sec, 5);
+var sub = firstn.subscribe(createSub("newsub"));
 
 },{"rxjs/Rx":7}]},{},[254]);

@@ -29,9 +29,31 @@ function createSub(t){
     }
 }
 
-const sec = createInt(1000);
-const sub = sec.subscribe(createSub("newsub"));
 
-setTimeout(()=>{
-    sub.unsubscribe();
-},5000)
+
+//setTimeout(()=>{
+//    sub.unsubscribe();
+//},5000)
+
+//multi param
+
+function take(observable, amount){
+    return new Rx.Observable(observer=>{
+        let c =0;
+        const subscription = observable.subscribe({
+            next(item){
+                observer.next(item);
+                if(++c>=amount)
+                observer.complete();
+            },error(error){
+
+            },complete(){
+                return()=>subscription.unsubscribe();
+            }
+        })
+    })
+}
+
+const sec = createInt(1000);
+const firstn = take(sec,5);
+const sub = firstn.subscribe(createSub("newsub"));
