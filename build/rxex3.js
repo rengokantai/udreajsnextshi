@@ -9904,4 +9904,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 _Rx2.default.Observable.interval(1000).take(3).subscribe((0, _util.createSub)("interval"));
 _Rx2.default.Observable.timer(1000).subscribe((0, _util.createSub)("timer")); //timer has two params (start timeout, interval)
 
+_Rx2.default.Observable.of("1", "2", "3").subscribe((0, _util.createSub)("of"));
+_Rx2.default.Observable.from(["1", "2", "3"]).subscribe((0, _util.createSub)("from")); //from must use array
+_Rx2.default.Observable.throw(new Error("error")).subscribe((0, _util.createSub)("error"));
+_Rx2.default.Observable.empty().subscribe((0, _util.createSub)("empty"));
+
 },{"./lib/util":254,"rxjs/Rx":7}]},{},[255]);
