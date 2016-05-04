@@ -9908,5 +9908,18 @@ _Rx2.default.Observable.of("1", "2", "3").subscribe((0, _util.createSub)("of"));
 _Rx2.default.Observable.from(["1", "2", "3"]).subscribe((0, _util.createSub)("from")); //from must use array
 _Rx2.default.Observable.throw(new Error("error")).subscribe((0, _util.createSub)("error"));
 _Rx2.default.Observable.empty().subscribe((0, _util.createSub)("empty"));
+_Rx2.default.Observable.never().subscribe((0, _util.createSub)("empty")); //nothing, wtf??
+_Rx2.default.Observable.range(1, 3).subscribe((0, _util.createSub)("empty"));
+
+//defer
+var j = 0;
+var $defer = _Rx2.default.Observable.defer(function () {
+  j++;
+  return _Rx2.default.Observable.of(j);
+});
+
+$defer.subscribe((0, _util.createSub)("one"));
+$defer.subscribe((0, _util.createSub)("two"));
+$defer.subscribe((0, _util.createSub)("three"));
 
 },{"./lib/util":254,"rxjs/Rx":7}]},{},[255]);
