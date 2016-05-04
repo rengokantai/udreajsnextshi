@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>t</title>
+    <style>
+        .draggable{
+            transition: background 200ms;
+            background: #aaaaaa;
+            width: 20px;
+            height:20px;
+            position: absolute;
+            cursor: move;
+            border:5px solid #444444;
+            top:0;
+            left:0;
+        }
+        .draggable.dragging{
+            background: #455555;
+            pointer-events: none;
+        }
+        .drop-area{
+            transition: background 200ms;
+            background: blue;
+            color:#fff;
+            margin:10px 0;
+            padding:10px;
+        }
+        .drop-area.dropped{
+            background-color: #Fee2ee;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+<div class="draggable" id="drag"></div>
+<ul>
+    <li class="drop-area">droparea1</li>
+    <li class="drop-area">droparea2</li>
+    <li class="drop-area">droparea3</li>
+    <li class="drop-area">droparea4</li>
+    <li class="drop-area">droparea5</li>
+    <li class="drop-area">droparea6</li>
+</ul>
+<script src="dragdrop.js"></script>
+</body>
+</html>
